@@ -6,24 +6,24 @@ export const EventStatus = {
 
 export type EventStatusType = (typeof EventStatus)[keyof typeof EventStatus];
 
-export interface Country {
+export type Country = {
   id: number;
   name: string;
-}
+};
 
-export interface City {
+export type City = {
   id: number;
   name: string;
   country: Country;
-}
+};
 
-export interface Zone {
+export type Zone = {
   id: number;
   name: string;
   city: City;
-}
+};
 
-export interface Event {
+export type Event = {
   id: string;
   type: string;
   date: string;
@@ -31,4 +31,4 @@ export interface Event {
   booked: number;
   capacity: number;
   status: EventStatusType;
-}
+};

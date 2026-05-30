@@ -1,7 +1,7 @@
-import type { EventStatus } from '@/src/api';
+import type { EventStatusType } from '@/src/api';
 
-export interface EventsFilterParams {
-  status?: EventStatus;
+export type EventsFilterParams = {
+  status?: EventStatusType;
   type?: string;
   /** Matches `event.zone.city.name` (case-insensitive). */
   city?: string;
@@ -11,12 +11,12 @@ export type EventsSortField = 'date' | 'booked' | 'capacity';
 
 export type EventsSortDirection = 'asc' | 'desc';
 
-export interface EventsSortParams {
+export type EventsSortParams = {
   field: EventsSortField;
   direction: EventsSortDirection;
 }
 
-export interface UseFilteredEventsParams {
+export type UseFilteredEventsParams = {
   filters?: EventsFilterParams;
   sort?: EventsSortParams;
 }
