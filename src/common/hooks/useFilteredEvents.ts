@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
-import type { Event } from '@/src/api';
+import type { Event } from '../../api';
 
-import type { UseFilteredEventsParams } from './events-filters.types';
-import { selectFilteredEvents } from './events-selectors';
-import { useEventsQuery } from './useEventsQuery';
+import type { UseFilteredEventsParams } from '../models/events-filters.types';
+import { useEventsQuery } from '../queries/useEventsQuery';
+import { selectFilteredEvents } from './utils/events-selectors';
 
 const EMPTY_FILTERS: UseFilteredEventsParams['filters'] = {};
 

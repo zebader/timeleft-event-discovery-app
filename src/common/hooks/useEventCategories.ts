@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { selectEventCategories } from './events-selectors';
-import { useEventsQuery } from './useEventsQuery';
+import { useEventsQuery } from '../queries/useEventsQuery';
+import { selectEventCategories } from './utils/events-selectors';
 
 export function useEventCategories() {
   const memoizedSelector = useCallback(selectEventCategories, []);

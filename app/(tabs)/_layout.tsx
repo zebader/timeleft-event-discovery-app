@@ -1,11 +1,9 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
+import { Tabs } from 'expo-router';
 import React from 'react';
-import { Pressable } from 'react-native';
 
-import { useClientOnlyValue } from '@/src/components/useClientOnlyValue';
-import { useColorScheme } from '@/src/components/useColorScheme';
-import Colors from '@/src/constants/Colors';
+import { Colors } from '@/common/constants';
+import { useClientOnlyValue, useColorScheme } from '@/common/hooks';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -27,31 +25,18 @@ export default function TabLayout() {
         headerShown: useClientOnlyValue(false, true),
       }}>
       <Tabs.Screen
-        name="index"
+        name="lobby"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
+          title: 'Lobby',
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="discovery"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Discovery',
+          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
         }}
       />
     </Tabs>

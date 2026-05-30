@@ -1,0 +1,1 @@
+export { useEventsQuery } from './useEventsQuery';

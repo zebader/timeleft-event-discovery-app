@@ -1,10 +1,10 @@
 import { Text } from "@/common/components";
 import { View } from "react-native";
 
-export const Lobby = () => {
+export const Discovery = () => {
   return (
     <View>
-      <Text>Lobby</Text>
+      <Text>Discovery</Text>
     </View>
   );
 };

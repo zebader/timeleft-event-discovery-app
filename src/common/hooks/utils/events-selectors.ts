@@ -1,9 +1,9 @@
-import type { Event } from '@/src/api';
+import type { Event } from '../../../api';
 
 import type {
-  EventsFilterParams,
-  EventsSortParams,
-} from './events-filters.types';
+    EventsFilterParams,
+    EventsSortParams,
+} from '../../models/events-filters.types';
 
 export function selectEventCategories(events: Event[]): string[] {
   const types = new Set(events.map((event) => event.type));

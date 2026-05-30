@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import type { Event } from '@/src/api';
-import { eventsKeys, fetchEvents } from '@/src/api';
+import type { Event } from '../../api';
+import { eventsKeys, fetchEvents } from '../../api';
 
 export function useEventsQuery<TData = Event[]>(options?: {
   select?: (data: Event[]) => TData;
