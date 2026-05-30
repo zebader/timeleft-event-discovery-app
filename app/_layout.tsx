@@ -1,3 +1,8 @@
+import {
+  Figtree_400Regular,
+  Figtree_500Medium,
+  Figtree_700Bold,
+} from '@expo-google-fonts/figtree';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -24,6 +29,9 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
+    Figtree_400Regular,
+    Figtree_500Medium,
+    Figtree_700Bold,
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     ...FontAwesome.font,
   });

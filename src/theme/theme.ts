@@ -1,3 +1,5 @@
+import { fontFamilies } from './fonts';
+
 export type ColorPalette = {
   primary: string;
   secondary: string;
@@ -34,16 +36,14 @@ export type Typography = {
 };
 
 /** Index-based spacing scale, e.g. `theme.spacing[2]` → 8 */
-export type SpacingScale = readonly [
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-];
+export type SpacingScale = {
+  xs: string;
+  sm: string;
+  md: string;
+  lg: string;
+  xl: string;
+  xxl: string;
+};
 
 export type AppTheme = {
   colors: ColorPalette;
@@ -51,14 +51,21 @@ export type AppTheme = {
   spacing: SpacingScale;
 };
 
-const spacing = [0, 4, 8, 12, 16, 24, 32, 48] as const satisfies SpacingScale;
+const spacing = {
+  xs: '4px',
+  sm: '8px',
+  md: '16px',
+  lg: '24px',
+  xl: '32px',
+  xxl: '48px',
+} satisfies SpacingScale;
 
 const typography = {
   fontFamily: {
-    regular: 'System',
-    medium: 'System',
-    bold: 'System',
-    mono: 'SpaceMono',
+    regular: fontFamilies.regular,
+    medium: fontFamilies.medium,
+    bold: fontFamilies.bold,
+    mono: fontFamilies.mono,
   },
   fontSize: {
     xs: 12,
