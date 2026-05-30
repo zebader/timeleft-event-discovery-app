@@ -1,10 +1,19 @@
 import { Text } from "@/common/components";
-import { View } from "react-native";
+import styled from "styled-components/native";
+
+
 
 export const Lobby = () => {
   return (
-    <View>
+    <S.Container>
       <Text>Lobby</Text>
-    </View>
+    </S.Container>
   );
 };
+
+namespace S {
+  export const Container = styled.View`
+    flex: 1;
+    background-color: ${({ theme }) => theme.colors.background};
+  `;
+}

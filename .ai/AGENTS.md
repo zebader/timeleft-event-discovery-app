@@ -34,6 +34,37 @@ import { Text } from '@/common/components';
 import { useEventsQuery } from '@/common/queries/useEventsQuery'; // when already under common/
 ```
 
+## Styling (styled-components)
+
+- **ALWAYS** use `styled-components` for component and screen styling. Import from `styled-components/native` in React Native / Expo screens and feature UI.
+- **ALWAYS** read design tokens from the theme (`src/theme/theme.ts`) via `${({ theme }) => theme...}` — do not hardcode colors, spacing, or font sizes when a theme value exists.
+- **ALWAYS** colocate styled primitives for a screen or component in a `namespace S { ... }` block at the bottom of the same file. Prefix styled elements with `S.` in JSX (e.g. `<S.Container>`).
+- **NEVER** use `StyleSheet.create`, inline style objects, or raw `react-native` `View`/`Text` wrappers for layout and visual styling in feature UI — reserve those only where styled-components cannot apply (e.g. third-party components with no styled wrapper yet).
+- Shared cross-feature styled primitives may live under `src/common/ui/` (or feature `ui/` folders) using the same `namespace S` pattern.
+
+```typescript
+import styled from 'styled-components/native';
+
+export const Lobby = () => (
+  <S.Container>
+    <S.Title>Lobby</S.Title>
+  </S.Container>
+);
+
+namespace S {
+  export const Container = styled.View`
+    flex: 1;
+    background-color: ${({ theme }) => theme.colors.background};
+    padding: ${({ theme }) => theme.spacing[4]}px;
+  `;
+
+  export const Title = styled.Text`
+    color: ${({ theme }) => theme.colors.text};
+    font-size: ${({ theme }) => theme.typography.fontSize.lg}px;
+  `;
+}
+```
+
 ## 1. Data Layer & TanStack React Query Rules
 
 ### D. Wrapper Hook Architecture & Folder Directory

@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/common/hooks';
-import { QueryProvider } from '@/common/providers';
+import { QueryProvider, StyledThemeProvider } from '@/common/providers';
 
 export {
     // Catch any errors thrown by the Layout component.
@@ -51,11 +51,13 @@ function RootLayoutNav() {
 
   return (
     <QueryProvider>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack>
-      </ThemeProvider>
+      <StyledThemeProvider>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          </Stack>
+        </ThemeProvider>
+      </StyledThemeProvider>
     </QueryProvider>
   );
 }
