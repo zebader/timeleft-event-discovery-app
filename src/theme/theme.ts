@@ -15,6 +15,8 @@ export type ColorPalette = {
   statusLiveBackground: string;
   statusUpcomingBackground: string;
   statusPastBackground: string;
+  tabBarActive: string;
+  tabBarInactive: string;
 };
 
 export type Typography = {
@@ -106,8 +108,8 @@ const typography = {
 } satisfies Typography;
 
 const lightColors = {
-  primary: '#2f95dc',
-  secondary: '#5856D6',
+  primary: '#ef89db',
+  secondary: '#8968ef',
   background: '#f8f3ed',
   surface: '#fff9',
   text: '#000000',
@@ -120,10 +122,12 @@ const lightColors = {
   statusUpcomingBackground: '#e5e5e5',
   statusPastBackground: '#f5d0d0',
   white: '#ffffff',
+  tabBarActive: '#4caf50',
+  tabBarInactive: '#7f8c8d',
 } satisfies ColorPalette;
 
 const darkColors = {
-  primary: '#ffffff',
+  primary: '#ef89db',
   secondary: '#5e5ce6',
   background: '#000000',
   surface: '#1c1c1e',
@@ -137,6 +141,8 @@ const darkColors = {
   statusUpcomingBackground: '#484848',
   statusPastBackground: '#5c3a3a',
   white: '#ffffff',
+  tabBarActive: '#5ec269',
+  tabBarInactive: '#9BA1A6',
 } satisfies ColorPalette;
 
 export const lightTheme: AppTheme = {

@@ -3,6 +3,5 @@ export {
   type BottomSheetProps
 } from './BottomSheet';
 export { ExternalLink } from './ExternalLink';
+export { HapticTab } from './HapticTab';
 export { LocationSelector } from './LocationSelector';
-export { MonoText } from './StyledText';
-export { Text, View } from './Themed';
