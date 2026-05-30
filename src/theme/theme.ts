@@ -11,6 +11,10 @@ export type ColorPalette = {
   error: string;
   success: string;
   warning: string;
+  white: string;
+  statusLiveBackground: string;
+  statusUpcomingBackground: string;
+  statusPastBackground: string;
 };
 
 export type Typography = {
@@ -45,10 +49,20 @@ export type SpacingScale = {
   xxl: string;
 };
 
+export type RadiusScale = {
+  sm: string;
+  md: string;
+  lg: string;
+  xl: string;
+  card: string;
+  round: string;
+};
+
 export type AppTheme = {
   colors: ColorPalette;
   typography: Typography;
   spacing: SpacingScale;
+  radius: RadiusScale;
 };
 
 const spacing = {
@@ -59,6 +73,15 @@ const spacing = {
   xl: '32px',
   xxl: '48px',
 } satisfies SpacingScale;
+
+const radius = {
+  sm: '4px',
+  md: '8px',
+  lg: '16px',
+  xl: '24px',
+  card: '12px',
+  round: '9999px',
+} satisfies RadiusScale;
 
 const typography = {
   fontFamily: {
@@ -85,14 +108,18 @@ const typography = {
 const lightColors = {
   primary: '#2f95dc',
   secondary: '#5856D6',
-  background: '#ffffff',
-  surface: '#f5f5f5',
+  background: '#f8f3ed',
+  surface: '#fff9',
   text: '#000000',
   textMuted: '#666666',
-  border: '#e0e0e0',
+  border: '#efe8de',
   error: '#ff3b30',
   success: '#34c759',
   warning: '#ff9500',
+  statusLiveBackground: '#d4f5c4',
+  statusUpcomingBackground: '#e5e5e5',
+  statusPastBackground: '#f5d0d0',
+  white: '#ffffff',
 } satisfies ColorPalette;
 
 const darkColors = {
@@ -106,18 +133,24 @@ const darkColors = {
   error: '#ff453a',
   success: '#32d74b',
   warning: '#ff9f0a',
+  statusLiveBackground: '#3d5c34',
+  statusUpcomingBackground: '#484848',
+  statusPastBackground: '#5c3a3a',
+  white: '#ffffff',
 } satisfies ColorPalette;
 
 export const lightTheme: AppTheme = {
   colors: lightColors,
   typography,
   spacing,
+  radius,
 };
 
 export const darkTheme: AppTheme = {
   colors: darkColors,
   typography,
   spacing,
+  radius,
 };
 
 export const theme = lightTheme;

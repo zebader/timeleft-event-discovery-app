@@ -2,22 +2,18 @@ import type { Event } from '@/api/types';
 import { useFilteredEvents } from '@/common/hooks';
 import { FlashList, type ListRenderItem } from '@shopify/flash-list';
 import { ActivityIndicator } from 'react-native';
-import { EventsFilterParams } from 'src/common/models/events-filters.types';
+import type { EventsFilterParams } from '@/common/models/events-filters.types';
 import { styled, useTheme } from 'styled-components/native';
+import { EventListCard } from './EventListCard';
 
 export const EventList = ({ filters = {} }: { filters?: EventsFilterParams }) => {
   const theme = useTheme();
   const { data: events = [], isPending } = useFilteredEvents({ filters });
 
   const renderEvent: ListRenderItem<Event> = ({ item }) => (
-    <S.EventRow>
-      <S.EventLabel>{item.zone.city.name}</S.EventLabel>
-      <S.EventLabel>{item.type}</S.EventLabel>
-      <S.EventLabel>{item.date}</S.EventLabel>
-      <S.EventLabel>{item.booked}</S.EventLabel>
-      <S.EventLabel>{item.capacity}</S.EventLabel>
-      <S.EventLabel>{item.status}</S.EventLabel>
-    </S.EventRow>
+    <S.CardWrapper>
+      <EventListCard event={item} />
+    </S.CardWrapper>
   );
 
   return (
@@ -27,6 +23,7 @@ export const EventList = ({ filters = {} }: { filters?: EventsFilterParams }) =>
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
       style={S.listStyle}
+      contentContainerStyle={S.listContent}
       ListEmptyComponent={isPending ? (
         <S.LoadingContainer>
           <ActivityIndicator color={theme.colors.primary} />
@@ -40,6 +37,15 @@ export const EventList = ({ filters = {} }: { filters?: EventsFilterParams }) =>
 
 namespace S {
   export const listStyle = { flex: 1 };
+
+  export const listContent = {
+    paddingHorizontal: 16,
+    paddingBottom: 24,
+  };
+
+  export const CardWrapper = styled.View`
+    margin-bottom: ${({ theme }) => theme.spacing.md};
+  `;
 
   export const EmptyLabel = styled.Text`
     font-family: ${({ theme }) => theme.typography.fontFamily.regular};
@@ -56,15 +62,4 @@ namespace S {
     padding: ${({ theme }) => theme.spacing.xl};
   `;
 
-  export const EventRow = styled.View`
-    padding: ${({ theme }) => theme.spacing.md};
-    border-bottom-width: 1px;
-    border-bottom-color: ${({ theme }) => theme.colors.border};
-  `;
-
-  export const EventLabel = styled.Text`
-    font-family: ${({ theme }) => theme.typography.fontFamily.regular};
-    font-size: ${({ theme }) => theme.typography.fontSize.sm}px;
-    color: ${({ theme }) => theme.colors.text};
-  `;
 }

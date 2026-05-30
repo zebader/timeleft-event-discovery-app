@@ -84,10 +84,10 @@ namespace S {
     min-width: 140px;
     padding-vertical: ${({ theme }) => theme.spacing.sm};
     padding-horizontal: ${({ theme }) => theme.spacing.md};
-    border-radius: 8px;
+    border-radius: ${({ theme }) => theme.radius.xl};
     border-width: 1px;
     border-color: ${({ theme }) => theme.colors.border};
-    background-color: ${({ theme }) => theme.colors.surface};
+    background-color: ${({ theme }) => theme.colors.white};
   `;
 
   export const SelectorLabel = styled.Text`
