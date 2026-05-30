@@ -1,17 +1,12 @@
-import { DEFAULT_LOCATION, LocationSelector } from "@/common/components";
-import { useState } from "react";
+import { LocationSelector } from '@/common/components';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Lobby = () => {
-  const [selectedLocation, setSelectedLocation] = useState(DEFAULT_LOCATION);
   return (
     <S.Container>
       <S.Header>
-        <LocationSelector
-          selectedLocation={selectedLocation}
-          onSelectLocation={setSelectedLocation}
-        />
+        <LocationSelector />
       </S.Header>
     </S.Container>
   );

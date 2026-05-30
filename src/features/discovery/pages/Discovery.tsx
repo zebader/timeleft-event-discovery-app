@@ -1,24 +1,20 @@
-import {
-  DEFAULT_LOCATION,
-  LocationSelector,
-} from '@/common/components';
-import { useState } from 'react';
+import { LocationSelector } from '@/common/components';
+import { selectedCountryAtom } from '@/common/data-access/atoms/location.atom';
+import { useAtomValue } from 'jotai';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
+
 import { EventList } from '../ui/EventList';
 
 export const Discovery = () => {
-  const [selectedLocation, setSelectedLocation] = useState(DEFAULT_LOCATION);
+  const selectedCountry = useAtomValue(selectedCountryAtom);
 
   return (
     <S.Container>
       <S.Header>
-        <LocationSelector
-          selectedLocation={selectedLocation}
-          onSelectLocation={setSelectedLocation}
-        />
+        <LocationSelector />
       </S.Header>
-      <EventList filters={{ country: selectedLocation }} />
+      <EventList filters={{ country: selectedCountry }} />
     </S.Container>
   );
 };

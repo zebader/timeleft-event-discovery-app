@@ -1,57 +1,36 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { FlashList, type ListRenderItem } from '@shopify/flash-list';
-import React, { useCallback, useState } from 'react';
+import { useAtom } from 'jotai';
+import { useCallback } from 'react';
 import { ActivityIndicator } from 'react-native';
 import styled, { useTheme } from 'styled-components/native';
 
+import { selectedCountryAtom } from '../data-access/atoms/location.atom';
 import { useEventLocations } from '../hooks';
 import { useBottomSheet } from '../hooks/components/useBottomSheet';
 import { BottomSheet } from './BottomSheet';
 
-export const DEFAULT_LOCATION = 'Spain';
-
-export type LocationSelectorProps = {
-  /** Controlled selected location. Pair with `onSelectLocation`. */
-  selectedLocation?: string;
-  /** Initial location when uncontrolled. Defaults to Spain. */
-  defaultLocation?: string;
-  /** Called when the user picks a location. Required when `selectedLocation` is set. */
-  onSelectLocation?: (location: string) => void;
-};
-
-export const LocationSelector = ({
-  selectedLocation,
-  defaultLocation = DEFAULT_LOCATION,
-  onSelectLocation,
-}: LocationSelectorProps) => {
+export const LocationSelector = () => {
   const theme = useTheme();
+  const [selectedCountry, setSelectedCountry] = useAtom(selectedCountryAtom);
   const { data: locations = [], isPending } = useEventLocations();
-
-  const [internalLocation, setInternalLocation] = useState(defaultLocation);
   const { visible, open, close } = useBottomSheet();
 
-  const isControlled =
-    onSelectLocation !== undefined && selectedLocation !== undefined;
-  const activeLocation = isControlled ? selectedLocation : internalLocation;
-
-  const handleSelectLocation = useCallback(
-    (location: string) => {
-      if (!isControlled) {
-        setInternalLocation(location);
-      }
-      onSelectLocation?.(location);
+  const handleSelectCountry = useCallback(
+    (country: string) => {
+      setSelectedCountry(country);
       close();
     },
-    [close, isControlled, onSelectLocation],
+    [close, setSelectedCountry],
   );
 
   const renderLocation: ListRenderItem<string> = useCallback(
     ({ item }) => (
-      <S.LocationRow onPress={() => handleSelectLocation(item)}>
+      <S.LocationRow onPress={() => handleSelectCountry(item)}>
         <S.LocationLabel>{item}</S.LocationLabel>
       </S.LocationRow>
     ),
-    [handleSelectLocation],
+    [handleSelectCountry],
   );
 
   return (
@@ -59,8 +38,8 @@ export const LocationSelector = ({
       <S.SelectorButton
         onPress={open}
         accessibilityRole="button"
-        accessibilityLabel={`Selected location: ${activeLocation}. Tap to change.`}>
-        <S.SelectorLabel>{activeLocation}</S.SelectorLabel>
+        accessibilityLabel={`Selected country: ${selectedCountry}. Tap to change.`}>
+        <S.SelectorLabel>{selectedCountry}</S.SelectorLabel>
         <FontAwesome
           name="chevron-down"
           size={14}
@@ -71,24 +50,24 @@ export const LocationSelector = ({
       <BottomSheet
         visible={visible}
         onClose={close}
-        title="Location"
-        backdropAccessibilityLabel="Close location picker">
-
+        title="Country"
+        backdropAccessibilityLabel="Close country picker">
         <FlashList
           data={locations}
           renderItem={renderLocation}
           keyExtractor={(item) => item}
           showsVerticalScrollIndicator={false}
           style={S.listStyle}
-          ListEmptyComponent={isPending ? (
-            <S.LoadingContainer>
-              <ActivityIndicator color={theme.colors.primary} />
-            </S.LoadingContainer>
-          ) : (
-            <S.EmptyLabel>No locations available</S.EmptyLabel>)
+          ListEmptyComponent={
+            isPending ? (
+              <S.LoadingContainer>
+                <ActivityIndicator color={theme.colors.primary} />
+              </S.LoadingContainer>
+            ) : (
+              <S.EmptyLabel>No countries available</S.EmptyLabel>
+            )
           }
         />
-
       </BottomSheet>
     </>
   );
