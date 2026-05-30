@@ -5,6 +5,7 @@ export type EventsFilterParams = {
   type?: string;
   /** Matches `event.zone.city.name` (case-insensitive). */
   city?: string;
+  country?: string;
 }
 
 export type EventsSortField = 'date' | 'booked' | 'capacity';

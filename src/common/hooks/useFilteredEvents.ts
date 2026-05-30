@@ -10,6 +10,7 @@ const EMPTY_FILTERS: UseFilteredEventsParams['filters'] = {};
 
 export function useFilteredEvents(params: UseFilteredEventsParams = {}) {
   const filters = params.filters ?? EMPTY_FILTERS;
+
   const { sort } = params;
 
   const memoizedSelector = useCallback(

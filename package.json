@@ -6,12 +6,15 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "expo lint",
+    "prepare": "husky"
   },
   "dependencies": {
     "@expo-google-fonts/figtree": "^0.4.1",
     "@expo/vector-icons": "^15.0.3",
     "@react-navigation/native": "^7.1.8",
+    "@shopify/flash-list": "2.0.2",
     "@tanstack/react-query": "^5.100.14",
     "expo": "~54.0.34",
     "expo-constants": "~18.0.13",
@@ -32,7 +35,15 @@
     "styled-components": "^6.4.2"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin": "^5.10.0",
     "@types/react": "~19.1.0",
+    "eslint": "^9.0.0",
+    "eslint-config-expo": "~10.0.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "globals": "^17.6.0",
+    "husky": "^9.1.7",
     "react-test-renderer": "19.1.0",
     "typescript": "~5.9.2"
   },

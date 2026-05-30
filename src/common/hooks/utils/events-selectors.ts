@@ -1,13 +1,19 @@
-import type { Event } from '../../../api';
+import type { Country, Event } from '../../../api';
 
 import type {
-    EventsFilterParams,
-    EventsSortParams,
+  EventsFilterParams,
+  EventsSortParams,
 } from '../../models/events-filters.types';
 
 export function selectEventCategories(events: Event[]): string[] {
   const types = new Set(events.map((event) => event.type));
   return Array.from(types).sort((a, b) => a.localeCompare(b));
+}
+
+/* TODO:We will use only countries for now */
+export function selectEventLocations(events: Event[]): Country['name'][] {
+  const locations = new Set(events.map((event) => event.zone.city.country.name));
+  return Array.from(locations).sort((a, b) => a.localeCompare(b));
 }
 
 function matchesFilters(event: Event, filters: EventsFilterParams): boolean {
@@ -22,6 +28,12 @@ function matchesFilters(event: Event, filters: EventsFilterParams): boolean {
   if (filters.city !== undefined) {
     const city = filters.city.trim().toLowerCase();
     if (city.length > 0 && event.zone.city.name.toLowerCase() !== city) {
+      return false;
+    }
+  }
+  if (filters.country !== undefined) {
+    const country = filters.country.trim().toLowerCase();
+    if (country.length > 0 && event.zone.city.country.name.toLowerCase() !== country) {
       return false;
     }
   }

@@ -1,7 +1,11 @@
 {
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "typescript.format.indentSize": 2,
+  "javascript.format.indentSize": 2,
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit",
     "source.sortMembers": "explicit"
   }
 }

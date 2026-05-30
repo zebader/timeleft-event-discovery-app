@@ -34,6 +34,26 @@ import { Text } from '@/common/components';
 import { useEventsQuery } from '@/common/queries/useEventsQuery'; // when already under common/
 ```
 
+## Lists (`FlashList`)
+
+- **ALWAYS** use [`@shopify/flash-list`](https://shopify.github.io/flash-list/) (`FlashList`) for scrollable lists. **NEVER** use React Native's `FlatList` or `SectionList` for app UI lists.
+- Install with `npx expo install @shopify/flash-list` when adding the dependency to a fresh project.
+- Import `FlashList` and `ListRenderItem` from `@shopify/flash-list` (not `react-native`).
+- `keyExtractor`, `renderItem`, `ListEmptyComponent`, and other list props are similar to `FlatList`; FlashList v2 (Expo SDK 54+) handles item sizing automatically.
+- Give the list a bounded height when inside flex layouts (e.g. `flex: 1` on a parent in a sheet or screen).
+
+```typescript
+import { FlashList, type ListRenderItem } from '@shopify/flash-list';
+
+const renderItem: ListRenderItem<string> = ({ item }) => <Row label={item} />;
+
+<FlashList
+  data={items}
+  renderItem={renderItem}
+  keyExtractor={(item) => item}
+/>;
+```
+
 ## Styling (styled-components)
 
 - **ALWAYS** use `styled-components` for component and screen styling. Import from `styled-components/native` in React Native / Expo screens and feature UI.
