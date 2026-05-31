@@ -1,14 +1,14 @@
 import type { Event } from '@/api/types';
 import { useFilteredEvents } from '@/common/hooks';
 import { FlashList, type ListRenderItem } from '@shopify/flash-list';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, RefreshControl } from 'react-native';
 import type { EventsFilterParams } from '@/common/models/events-filters.types';
 import { styled, useTheme } from 'styled-components/native';
 import { EventListCard } from './EventListCard';
 
 export const EventList = ({ filters = {} }: { filters?: EventsFilterParams }) => {
   const theme = useTheme();
-  const { data: events = [], isPending } = useFilteredEvents({ filters });
+  const { data: events = [], isPending, refetch, isRefetching } = useFilteredEvents({ filters });
 
   const renderEvent: ListRenderItem<Event> = ({ item }) => (
     <S.CardWrapper>
@@ -24,6 +24,16 @@ export const EventList = ({ filters = {} }: { filters?: EventsFilterParams }) =>
       showsVerticalScrollIndicator={false}
       style={S.listStyle}
       contentContainerStyle={S.listContent}
+      refreshing={isRefetching}
+      onRefresh={refetch}
+      refreshControl={
+        <RefreshControl
+          refreshing={isRefetching}
+          onRefresh={refetch}
+          tintColor={theme.colors.primary}
+          colors={[theme.colors.primary]}
+        />
+      }
       ListEmptyComponent={isPending ? (
         <S.LoadingContainer>
           <ActivityIndicator color={theme.colors.primary} />
