@@ -1,4 +1,4 @@
-import type { Country, Event, EventStatusType } from '../../../api';
+import type { City, Event, EventStatusType } from '../../../api';
 
 import type {
   EventsFilterParams,
@@ -10,9 +10,8 @@ export function selectEventCategories(events: Event[]): string[] {
   return Array.from(types).sort((a, b) => a.localeCompare(b));
 }
 
-/* TODO:We will use only countries for now */
-export function selectEventLocations(events: Event[]): Country['name'][] {
-  const locations = new Set(events.map((event) => event.zone.city.country.name));
+export function selectEventLocations(events: Event[]): City['name'][] {
+  const locations = new Set(events.map((event) => event.zone.city.name));
   return Array.from(locations).sort((a, b) => a.localeCompare(b));
 }
 
@@ -40,13 +39,6 @@ function matchesFilters(event: Event, filters: EventsFilterParams): boolean {
       return false;
     }
   }
-  if (filters.country !== undefined) {
-    const country = filters.country.trim().toLowerCase();
-    if (country.length > 0 && event.zone.city.country.name.toLowerCase() !== country) {
-      return false;
-    }
-  }
-
   return true;
 }
 

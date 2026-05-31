@@ -1,7 +1,7 @@
 export {
-  DEFAULT_COUNTRY,
-  selectedCountryAtom,
-  type SelectedCountry
+  DEFAULT_CITY,
+  selectedCityAtom,
+  type SelectedCity
 } from './location.atom';
 
 export {

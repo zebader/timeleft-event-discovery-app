@@ -1,11 +1,9 @@
-import type { EventStatusType } from '../../api';
+import type { City, EventStatusType } from '../../api';
 
 export type EventsFilterParams = {
   status?: EventStatusType;
-  type?: string;
-  /** Matches `event.zone.city.name` (case-insensitive). */
-  city?: string;
-  country?: string;
+  type?: Event['type'];
+  city?: City['name'];
 }
 
 export type EventsSortField = 'date' | 'booked' | 'capacity';

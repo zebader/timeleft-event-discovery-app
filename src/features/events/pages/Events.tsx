@@ -1,5 +1,5 @@
 import { LocationSelector } from '@/common/components';
-import { selectedCountryAtom } from '@/common/data-access/atoms/location.atom';
+import { selectedCityAtom } from '@/common/data-access/atoms/location.atom';
 import { selectedStatusAtom } from '@/common/data-access/atoms/status.atom';
 import { useAtomValue } from 'jotai';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,7 +9,7 @@ import { EventList } from '../ui/EventList';
 import { StatusFilter } from '../ui/StatusFilter';
 
 export const Events = () => {
-  const selectedCountry = useAtomValue(selectedCountryAtom);
+  const selectedCity = useAtomValue(selectedCityAtom);
   const selectedStatus = useAtomValue(selectedStatusAtom);
 
   return (
@@ -18,7 +18,7 @@ export const Events = () => {
         <LocationSelector />
         <StatusFilter />
       </S.Header>
-      <EventList filters={{ country: selectedCountry, status: selectedStatus }} />
+      <EventList filters={{ city: selectedCity, status: selectedStatus }} />
     </S.Container>
   );
 };

@@ -1,8 +1,8 @@
-import type { Country } from '@/api/types';
+import type { City } from '@/api/types';
 import { atom } from 'jotai';
 
-export const DEFAULT_COUNTRY: Country['name'] = 'Spain';
+export const DEFAULT_CITY: City['name'] = 'Madrid';
 
-export type SelectedCountry = Country['name'];
+export type SelectedCity = City['name'];
 
-export const selectedCountryAtom = atom<SelectedCountry>(DEFAULT_COUNTRY);
+export const selectedCityAtom = atom<SelectedCity>(DEFAULT_CITY);

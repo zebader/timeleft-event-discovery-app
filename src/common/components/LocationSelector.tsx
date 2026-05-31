@@ -5,32 +5,32 @@ import { useCallback } from 'react';
 import { ActivityIndicator } from 'react-native';
 import styled, { useTheme } from 'styled-components/native';
 
-import { selectedCountryAtom } from '../data-access/atoms/location.atom';
+import { selectedCityAtom } from '../data-access/atoms/location.atom';
 import { useEventLocations } from '../hooks';
 import { useBottomSheet } from '../hooks/components/useBottomSheet';
 import { BottomSheet } from './BottomSheet';
 
 export const LocationSelector = () => {
   const theme = useTheme();
-  const [selectedCountry, setSelectedCountry] = useAtom(selectedCountryAtom);
+  const [selectedCity, setSelectedCity] = useAtom(selectedCityAtom);
   const { data: locations = [], isPending } = useEventLocations();
   const { visible, open, close } = useBottomSheet();
 
-  const handleSelectCountry = useCallback(
-    (country: string) => {
-      setSelectedCountry(country);
+  const handleSelectCity = useCallback(
+    (city: string) => {
+      setSelectedCity(city);
       close();
     },
-    [close, setSelectedCountry],
+    [close, setSelectedCity],
   );
 
   const renderLocation: ListRenderItem<string> = useCallback(
     ({ item }) => (
-      <S.LocationRow onPress={() => handleSelectCountry(item)}>
+      <S.LocationRow onPress={() => handleSelectCity(item)}>
         <S.LocationLabel>{item}</S.LocationLabel>
       </S.LocationRow>
     ),
-    [handleSelectCountry],
+    [handleSelectCity],
   );
 
   return (
@@ -38,8 +38,8 @@ export const LocationSelector = () => {
       <S.SelectorButton
         onPress={open}
         accessibilityRole="button"
-        accessibilityLabel={`Selected country: ${selectedCountry}. Tap to change.`}>
-        <S.SelectorLabel>{selectedCountry}</S.SelectorLabel>
+        accessibilityLabel={`Selected city: ${selectedCity}. Tap to change.`}>
+        <S.SelectorLabel>{selectedCity}</S.SelectorLabel>
         <FontAwesome
           name="chevron-down"
           size={14}
@@ -50,8 +50,8 @@ export const LocationSelector = () => {
       <BottomSheet
         visible={visible}
         onClose={close}
-        title="Country"
-        backdropAccessibilityLabel="Close country picker">
+        title="City"
+        backdropAccessibilityLabel="Close city picker">
         <FlashList
           data={locations}
           renderItem={renderLocation}
@@ -64,7 +64,7 @@ export const LocationSelector = () => {
                 <ActivityIndicator color={theme.colors.primary} />
               </S.LoadingContainer>
             ) : (
-              <S.EmptyLabel>No countries available</S.EmptyLabel>
+              <S.EmptyLabel>No cities available</S.EmptyLabel>
             )
           }
         />
