@@ -5,6 +5,13 @@ export {
 } from './location.atom';
 
 export {
+  DEFAULT_SORT_BY,
+  EventSortBy,
+  selectedSortByAtom,
+  type EventSortByType
+} from './sort.atom';
+
+export {
   DEFAULT_STATUS,
   selectedStatusAtom,
   type SelectedStatus

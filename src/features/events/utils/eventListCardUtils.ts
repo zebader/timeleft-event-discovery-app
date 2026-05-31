@@ -18,6 +18,8 @@ export function formatEventDate(isoDate: string): string {
   return `${day}/${month}/${year}`;
 }
 
+export const capitalizeString = (string: string) => string.charAt(0).toUpperCase() + string.slice(1);
+
 export function formatEventHeadline(event: Event): string {
 
   return `${event.zone.city.name} - ${event.id}`;

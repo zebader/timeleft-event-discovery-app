@@ -10,6 +10,7 @@ import { useEventStatuses } from '@/common/hooks';
 import { useBottomSheet } from '@/common/hooks/components/useBottomSheet';
 import { useAtom } from 'jotai';
 
+import { capitalizeString } from '../utils/eventListCardUtils';
 export const StatusFilter = () => {
   const theme = useTheme();
   const [selectedStatus, setSelectedStatus] = useAtom(selectedStatusAtom);
@@ -27,7 +28,7 @@ export const StatusFilter = () => {
   const renderStatus: ListRenderItem<EventStatusType> = useCallback(
     ({ item }) => (
       <S.StatusRow onPress={() => handleSelectStatus(item)}>
-        <S.StatusLabel>{item}</S.StatusLabel>
+        <S.StatusLabel>{capitalizeString(item)}</S.StatusLabel>
       </S.StatusRow>
     ),
     [handleSelectStatus],
@@ -39,7 +40,7 @@ export const StatusFilter = () => {
         onPress={open}
         accessibilityRole="button"
         accessibilityLabel={`Selected status: ${selectedStatus}. Tap to change.`}>
-        <S.SelectorLabel>{selectedStatus}</S.SelectorLabel>
+        <S.SelectorLabel>{capitalizeString(selectedStatus)}</S.SelectorLabel>
       </S.SelectorButton>
 
       <BottomSheet

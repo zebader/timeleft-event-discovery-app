@@ -1,14 +1,31 @@
 import type { Event } from '@/api/types';
+import {
+  selectedCityAtom,
+  selectedSortByAtom,
+  selectedStatusAtom,
+} from '@/common/data-access/atoms';
 import { useFilteredEvents } from '@/common/hooks';
 import { FlashList, type ListRenderItem } from '@shopify/flash-list';
+import { useAtomValue } from 'jotai';
+import { useMemo } from 'react';
 import { ActivityIndicator, RefreshControl } from 'react-native';
-import type { EventsFilterParams } from '@/common/models/events-filters.types';
 import { styled, useTheme } from 'styled-components/native';
 import { EventListCard } from './EventListCard';
+import { sortEvents } from '../utils/eventSortUtils';
 
-export const EventList = ({ filters = {} }: { filters?: EventsFilterParams }) => {
+export const EventList = () => {
   const theme = useTheme();
-  const { data: events = [], isPending, refetch, isRefetching } = useFilteredEvents({ filters });
+  const selectedCity = useAtomValue(selectedCityAtom);
+  const selectedStatus = useAtomValue(selectedStatusAtom);
+  const sortBy = useAtomValue(selectedSortByAtom);
+  const { data: events = [], isPending, refetch, isRefetching } = useFilteredEvents({
+    filters: { city: selectedCity, status: selectedStatus },
+  });
+
+  const sortedEvents = useMemo(
+    () => sortEvents(events, sortBy),
+    [events, sortBy],
+  );
 
   const renderEvent: ListRenderItem<Event> = ({ item }) => (
     <S.CardWrapper>
@@ -18,7 +35,7 @@ export const EventList = ({ filters = {} }: { filters?: EventsFilterParams }) =>
 
   return (
     <FlashList
-      data={events}
+      data={sortedEvents}
       renderItem={renderEvent}
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
