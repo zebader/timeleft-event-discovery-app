@@ -23,7 +23,7 @@ export default function TabLayout() {
         animation: 'shift',
       }}>
       <Tabs.Screen
-        name="lobby"
+        name="index"
         options={{
           title: 'Lobby',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
@@ -37,6 +37,11 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
           headerShown: false,
         }}
+        listeners={({ navigation }) => ({
+          tabPress: () => {
+            navigation.navigate('discovery', { screen: 'index' });
+          },
+        })}
       />
     </Tabs>
   );

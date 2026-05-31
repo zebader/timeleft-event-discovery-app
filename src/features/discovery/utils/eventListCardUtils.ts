@@ -19,10 +19,16 @@ export function formatEventDate(isoDate: string): string {
 }
 
 export function formatEventHeadline(event: Event): string {
-  const category =
-    event.type.charAt(0).toUpperCase() + event.type.slice(1).toLowerCase();
 
-  return `${category} - ${event.zone.city.name}`;
+  return `${event.zone.city.name} - ${event.id}`;
+}
+
+export function formatCategoryLabel(event: Event): string {
+  return event.type.charAt(0).toUpperCase() + event.type.slice(1).toLowerCase();
+}
+
+export function formatDetailTitle(event: Event): string {
+  return `${formatCategoryLabel(event)} - ${formatEventHeadline(event)}`;
 }
 
 export function formatStatusLabel(status: EventStatusType): string {
@@ -81,6 +87,12 @@ export function getStatusBackgroundKey(
     default:
       return 'statusPastBackground';
   }
+}
+
+export type StatusTextColorKey = 'success' | 'text';
+
+export function getStatusTextColorKey(status: EventStatusType): StatusTextColorKey {
+  return status === EventStatus.LIVE ? 'success' : 'text';
 }
 
 export function getEventArtworkImage(

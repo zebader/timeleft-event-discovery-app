@@ -2,7 +2,9 @@ import type { Event } from '@/api/types';
 import { Image } from 'react-native';
 import styled from 'styled-components/native';
 
+import { router } from 'expo-router';
 import {
+  formatCategoryLabel,
   formatEventDate,
   formatEventHeadline,
   formatStatusLabel,
@@ -24,7 +26,7 @@ export const EventListCard = ({ event }: EventListCardProps) => {
   const statusBackgroundKey = getStatusBackgroundKey(event.status);
 
   return (
-    <S.Card>
+    <S.Card onPress={() => router.push(`/discovery/${event.id}`)}>
       <S.ArtworkContainer>
         <S.ArtworkImage source={getEventArtworkImage(event.type)} resizeMode="contain" />
       </S.ArtworkContainer>
@@ -36,13 +38,13 @@ export const EventListCard = ({ event }: EventListCardProps) => {
             <S.StatusLabel>{formatStatusLabel(event.status)}</S.StatusLabel>
           </S.StatusPill>
         </S.TitleRow>
-
+        <S.CaptionText>{formatCategoryLabel(event)}</S.CaptionText>
         <S.DateText>{formatEventDate(event.date)}</S.DateText>
 
         <S.Spacer />
 
         <S.AvailabilityRow>
-          <S.AvailabilityText>Availability: </S.AvailabilityText>
+          <S.CaptionText>Availability: </S.CaptionText>
           <S.AvailabilityHighlight $colorKey={availabilityColorKey}>
             {availability}
           </S.AvailabilityHighlight>
@@ -53,7 +55,7 @@ export const EventListCard = ({ event }: EventListCardProps) => {
 };
 
 namespace S {
-  export const Card = styled.View`
+  export const Card = styled.Pressable`
     flex-direction: row;
     align-items: center;
     background-color: ${({ theme }) => theme.colors.surface};
@@ -133,7 +135,7 @@ namespace S {
     align-items: baseline;
   `;
 
-  export const AvailabilityText = styled.Text`
+  export const CaptionText = styled.Text`
     font-family: ${({ theme }) => theme.typography.fontFamily.regular};
     font-size: ${({ theme }) => theme.typography.fontSize.sm}px;
     color: ${({ theme }) => theme.colors.text};

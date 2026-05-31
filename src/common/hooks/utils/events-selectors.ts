@@ -21,6 +21,10 @@ export function selectEventStatuses(events: Event[]): EventStatusType[] {
   return Array.from(statuses).sort((a, b) => a.localeCompare(b));
 }
 
+export function selectEventDetails(events: Event[], id: string): Event | undefined {
+  return events.find((event) => event.id === id);
+}
+
 function matchesFilters(event: Event, filters: EventsFilterParams): boolean {
   if (filters.status !== undefined && event.status !== filters.status) {
     return false;
