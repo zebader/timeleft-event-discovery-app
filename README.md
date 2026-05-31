@@ -19,6 +19,8 @@ We value **clarity, strong mobile UX, code quality and maintainability, solid Re
 
 To ensure application stability and reliability, a multi-tiered testing strategy was adopted. Unit testing isolates core logic by focusing on selectors, utility functions, and the base API client, while integration testing verifies the behavior of our custom React Query hooks using mocked CDN data. Automated end-to-end (E2E) smoke tests are handled via Maestro to validate the primary navigation flows, which is complemented by comprehensive manual testing executed across both iOS and Android devices using Expo Go to guarantee a seamless, real-world user experience.
 
+To complement this testing strategy, a streamlined CI/CD pipeline can be automated via GitHub Actions to safeguard code quality and enforce development standards. The workflow is designed to trigger automatically on every pull request, executing our linting configurations, formatting checks, and the automated unit and integration test suites to ensure that only stable, fully verified code is ever merged into the main branch.
+
 ## How to run the project
 
 The recommended way to start the project is with [Expo Go](https://expo.dev/go):
