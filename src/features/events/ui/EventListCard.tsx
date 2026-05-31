@@ -7,13 +7,12 @@ import {
   formatCategoryLabel,
   formatEventDate,
   formatEventHeadline,
-  formatStatusLabel,
   getAvailabilityColor,
   getAvailabilityCount,
   getAvailabilityTextColorKey,
   getEventArtworkImage,
-  getStatusBackgroundKey,
 } from '../utils/eventListCardUtils';
+import { EventStatusPill } from './EventStatusPill';
 
 export type EventListCardProps = {
   event: Event;
@@ -23,7 +22,6 @@ export const EventListCard = ({ event }: EventListCardProps) => {
   const availability = getAvailabilityCount(event);
   const availabilityLevel = getAvailabilityColor(event);
   const availabilityColorKey = getAvailabilityTextColorKey(availabilityLevel);
-  const statusBackgroundKey = getStatusBackgroundKey(event.status);
 
   return (
     <S.Card onPress={() => router.push(`/events/${event.id}`)}>
@@ -34,9 +32,7 @@ export const EventListCard = ({ event }: EventListCardProps) => {
       <S.Content>
         <S.TitleRow>
           <S.Headline numberOfLines={2}>{formatEventHeadline(event)}</S.Headline>
-          <S.StatusPill $backgroundKey={statusBackgroundKey}>
-            <S.StatusLabel>{formatStatusLabel(event.status)}</S.StatusLabel>
-          </S.StatusPill>
+          <EventStatusPill status={event.status} />
         </S.TitleRow>
         <S.CaptionText>{formatCategoryLabel(event)}</S.CaptionText>
         <S.DateText>{formatEventDate(event.date)}</S.DateText>
@@ -97,25 +93,6 @@ namespace S {
     font-size: ${({ theme }) => theme.typography.fontSize.lg}px;
     color: ${({ theme }) => theme.colors.text};
     line-height: ${({ theme }) => theme.typography.fontSize.lg * theme.typography.lineHeight.normal}px;
-  `;
-
-  export const StatusPill = styled.View<{
-    $backgroundKey:
-      | 'statusLiveBackground'
-      | 'statusUpcomingBackground'
-      | 'statusPastBackground';
-  }>`
-    background-color: ${({ theme, $backgroundKey }) =>
-      theme.colors[$backgroundKey]};
-    border-radius: ${({ theme }) => theme.radius.round};
-    padding-vertical: ${({ theme }) => theme.spacing.sm};
-    padding-horizontal: ${({ theme }) => theme.spacing.sm};
-  `;
-
-  export const StatusLabel = styled.Text`
-    font-family: ${({ theme }) => theme.typography.fontFamily.bold};
-    font-size: ${({ theme }) => theme.typography.fontSize.xs}px;
-    color: ${({ theme }) => theme.colors.text};
   `;
 
   export const DateText = styled.Text`

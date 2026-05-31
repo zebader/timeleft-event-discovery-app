@@ -8,12 +8,10 @@ import { useEventDetails } from '@/common/hooks';
 import {
   formatDetailTitle,
   formatEventDate,
-  formatStatusLabel,
   getAvailabilityCount,
   getEventArtworkImage,
-  getStatusBackgroundKey,
-  getStatusTextColorKey,
 } from '../utils/eventListCardUtils';
+import { EventStatusPill } from '../ui/EventStatusPill';
 
 const PLACEHOLDER_DESCRIPTION =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
@@ -26,12 +24,6 @@ export const EventDetails = () => {
   const { data: event, isPending } = useEventDetails(id);
 
   const availability = event ? getAvailabilityCount(event) : 0;
-  const statusBackgroundKey = event
-    ? getStatusBackgroundKey(event.status)
-    : 'statusUpcomingBackground';
-  const statusTextColorKey = event
-    ? getStatusTextColorKey(event.status)
-    : 'text';
 
   return (
     <S.Container edges={['top', 'left', 'right']}>
@@ -66,11 +58,7 @@ export const EventDetails = () => {
 
                     <S.TitleRow>
                       <S.TitleText>{formatDetailTitle(event)}</S.TitleText>
-                      <S.StatusPill $backgroundKey={statusBackgroundKey}>
-                        <S.StatusLabel $colorKey={statusTextColorKey}>
-                          {formatStatusLabel(event.status)}
-                        </S.StatusLabel>
-                      </S.StatusPill>
+                      <EventStatusPill status={event.status} />
                     </S.TitleRow>
 
                     <S.DateBlock>
@@ -183,25 +171,6 @@ namespace S {
     color: ${({ theme }) => theme.colors.text};
     line-height: ${({ theme }) =>
       theme.typography.fontSize.lg * theme.typography.lineHeight.tight}px;
-  `;
-
-  export const StatusPill = styled.View<{
-    $backgroundKey:
-      | 'statusLiveBackground'
-      | 'statusUpcomingBackground'
-      | 'statusPastBackground';
-  }>`
-    background-color: ${({ theme, $backgroundKey }) =>
-      theme.colors[$backgroundKey]};
-    border-radius: ${({ theme }) => theme.radius.round};
-    padding-vertical: ${({ theme }) => theme.spacing.xs};
-    padding-horizontal: ${({ theme }) => theme.spacing.sm};
-  `;
-
-  export const StatusLabel = styled.Text<{ $colorKey: 'success' | 'text' }>`
-    font-family: ${({ theme }) => theme.typography.fontFamily.bold};
-    font-size: ${({ theme }) => theme.typography.fontSize.xs}px;
-    color: ${({ theme, $colorKey }) => theme.colors[$colorKey]};
   `;
 
   export const DateBlock = styled.View`
