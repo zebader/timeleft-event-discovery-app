@@ -1,4 +1,4 @@
-import type { City, EventStatusType } from '../../api';
+import type { City, Event, EventStatusType } from '../../api';
 
 export type EventsFilterParams = {
   status?: EventStatusType;
