@@ -5,13 +5,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styled, { useTheme } from 'styled-components/native';
 
 import { useEventDetails } from '@/common/hooks';
+import { EventStatusPill } from '../ui/EventStatusPill';
 import {
   formatDetailTitle,
   formatEventDate,
+  getAvailabilityColor,
   getAvailabilityCount,
+  getAvailabilityTextColorKey,
   getEventArtworkImage,
 } from '../utils/eventListCardUtils';
-import { EventStatusPill } from '../ui/EventStatusPill';
 
 const PLACEHOLDER_DESCRIPTION =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
@@ -23,8 +25,11 @@ export const EventDetails = () => {
   const theme = useTheme();
   const { data: event, isPending } = useEventDetails(id);
 
+  const availabilityLevel = event ? getAvailabilityColor(event) : null;
   const availability = event ? getAvailabilityCount(event) : 0;
-
+  const availabilityColorKey = availabilityLevel
+    ? getAvailabilityTextColorKey(availabilityLevel)
+    : 'success';
   return (
     <S.Container edges={['top', 'left', 'right']}>
       <S.HeaderBar>
@@ -75,8 +80,10 @@ export const EventDetails = () => {
             {event ? (
               <S.BottomBar edges={['bottom']}>
                 <S.AvailabilityRow>
-                  <S.AvailabilityLabel>Availability: </S.AvailabilityLabel>
-                  <S.AvailabilityCount>{availability}</S.AvailabilityCount>
+                  <S.CaptionText>Availability: </S.CaptionText>
+                  <S.AvailabilityHighlight $colorKey={availabilityColorKey}>
+                    {availability}
+                  </S.AvailabilityHighlight>
                 </S.AvailabilityRow>
 
                 <S.ParticipateButton accessibilityRole="button">
@@ -236,4 +243,18 @@ namespace S {
     font-size: ${({ theme }) => theme.typography.fontSize.lg}px;
     color: ${({ theme }) => theme.colors.white};
   `;
+
+  export const CaptionText = styled.Text`
+  font-family: ${({ theme }) => theme.typography.fontFamily.regular};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm}px;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+  export const AvailabilityHighlight = styled.Text<{
+    $colorKey: 'success' | 'warning' | 'error';
+  }>`
+  font-family: ${({ theme }) => theme.typography.fontFamily.bold};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm}px;
+  color: ${({ theme, $colorKey }) => theme.colors[$colorKey]};
+`;
 }
