@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 
 import Logo from '../../../../assets/images/logo.svg';
 import { HotInCitySlider } from '../ui/HotInCitySlider';
+import { CategoryChipsSlider } from '../ui/CategoryChipsSlider';
 
 const LOGO_WIDTH = 240;
 const LOGO_HEIGHT = LOGO_WIDTH / (815 / 231);
@@ -17,6 +18,7 @@ export const Lobby = () => (
       </S.LogoWrapper>
       <LocationSelector />
       <HotInCitySlider />
+      <CategoryChipsSlider />
     </S.Header>
   </S.Container>
 );

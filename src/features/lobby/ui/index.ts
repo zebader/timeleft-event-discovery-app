@@ -1,3 +1,4 @@
+export { CategoryChipsSlider } from './CategoryChipsSlider';
 export {
   HOT_IN_CITY_CARD_WIDTH,
   HotInCityCard,
