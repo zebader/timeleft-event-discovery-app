@@ -29,6 +29,10 @@ export function formatCategoryLabel(event: Event): string {
   return event.type.charAt(0).toUpperCase() + event.type.slice(1).toLowerCase();
 }
 
+export function formatHotCardTitle(event: Event): string {
+  return `${formatCategoryLabel(event)} - ${event.zone.city.name}`;
+}
+
 export function formatDetailTitle(event: Event): string {
   return `${formatCategoryLabel(event)} - ${formatEventHeadline(event)}`;
 }

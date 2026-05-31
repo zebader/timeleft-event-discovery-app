@@ -1,5 +1,6 @@
 import type { Event } from '@/api/types';
 import {
+  selectedCategoryAtom,
   selectedCityAtom,
   selectedSortByAtom,
   selectedStatusAtom,
@@ -17,9 +18,10 @@ export const EventList = () => {
   const theme = useTheme();
   const selectedCity = useAtomValue(selectedCityAtom);
   const selectedStatus = useAtomValue(selectedStatusAtom);
+  const selectedCategory = useAtomValue(selectedCategoryAtom);
   const sortBy = useAtomValue(selectedSortByAtom);
   const { data: events = [], isPending, refetch, isRefetching } = useFilteredEvents({
-    filters: { city: selectedCity, status: selectedStatus },
+    filters: { city: selectedCity, status: selectedStatus, type: selectedCategory },
   });
 
   const sortedEvents = useMemo(

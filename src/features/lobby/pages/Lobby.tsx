@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 
 import Logo from '../../../../assets/images/logo.svg';
+import { HotInCitySlider } from '../ui/HotInCitySlider';
 
 const LOGO_WIDTH = 240;
 const LOGO_HEIGHT = LOGO_WIDTH / (815 / 231);
@@ -15,6 +16,7 @@ export const Lobby = () => (
         <S.Title>Discover events in your city</S.Title>
       </S.LogoWrapper>
       <LocationSelector />
+      <HotInCitySlider />
     </S.Header>
   </S.Container>
 );

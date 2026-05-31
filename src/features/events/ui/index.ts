@@ -1,3 +1,4 @@
+export { CategoryFilter } from './CategoryFilter';
 export { EventList } from './EventList';
 export { EventListCard, type EventListCardProps } from './EventListCard';
 export { EventStatusPill, type EventStatusPillProps } from './EventStatusPill';

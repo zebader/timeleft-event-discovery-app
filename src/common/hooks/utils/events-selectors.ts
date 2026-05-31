@@ -24,6 +24,8 @@ export function selectEventDetails(events: Event[], id: string): Event | undefin
   return events.find((event) => event.id === id);
 }
 
+export const HOT_IN_CITY_LIMIT = 5;
+
 function matchesFilters(event: Event, filters: EventsFilterParams): boolean {
   if (filters.status !== undefined && event.status !== filters.status) {
     return false;

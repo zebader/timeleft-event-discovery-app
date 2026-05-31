@@ -1,4 +1,10 @@
 export {
+  DEFAULT_CATEGORY,
+  selectedCategoryAtom,
+  type SelectedCategory,
+} from './category.atom';
+
+export {
   DEFAULT_CITY,
   selectedCityAtom,
   type SelectedCity
