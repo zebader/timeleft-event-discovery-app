@@ -8,7 +8,7 @@ import styled from 'styled-components/native';
 import { EventList } from '../ui/EventList';
 import { StatusFilter } from '../ui/StatusFilter';
 
-export const Discovery = () => {
+export const Events = () => {
   const selectedCountry = useAtomValue(selectedCountryAtom);
   const selectedStatus = useAtomValue(selectedStatusAtom);
 

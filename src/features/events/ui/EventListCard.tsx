@@ -26,7 +26,7 @@ export const EventListCard = ({ event }: EventListCardProps) => {
   const statusBackgroundKey = getStatusBackgroundKey(event.status);
 
   return (
-    <S.Card onPress={() => router.push(`/discovery/${event.id}`)}>
+    <S.Card onPress={() => router.push(`/events/${event.id}`)}>
       <S.ArtworkContainer>
         <S.ArtworkImage source={getEventArtworkImage(event.type)} resizeMode="contain" />
       </S.ArtworkContainer>

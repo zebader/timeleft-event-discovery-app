@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router';
 
-export default function DiscoveryStackLayout() {
+export default function EventsStackLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />

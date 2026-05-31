@@ -31,15 +31,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="discovery"
+        name="events"
         options={{
-          title: 'Discovery',
+          title: 'Events',
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
           headerShown: false,
         }}
         listeners={({ navigation }) => ({
           tabPress: () => {
-            navigation.navigate('discovery', { screen: 'index' });
+            navigation.navigate('events', { screen: 'index' });
           },
         })}
       />
