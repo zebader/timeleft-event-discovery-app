@@ -102,7 +102,7 @@ namespace S {
     border-radius: ${({ theme }) => theme.radius.xl};
     border-width: 1px;
     border-color: ${({ theme }) => theme.colors.border};
-    background-color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.surface};
   `;
 
   export const ChipLabel = styled.Text`

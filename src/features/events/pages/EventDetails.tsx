@@ -205,7 +205,7 @@ namespace S {
   `;
 
   export const BottomBar = styled(SafeAreaView)`
-    background-color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.surface};
     border-top-left-radius: ${({ theme }) => theme.radius.xl};
     border-top-right-radius: ${({ theme }) => theme.radius.xl};
     padding: ${({ theme }) => theme.spacing.lg};
